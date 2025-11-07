@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+html, body, #root {
+  @apply bg-gray-900 text-white box-border;
+}
+
+/* Correct way to define custom properties (CSS variables) */
+@theme  {
+  
+    --main-bg-color: #0D1117;
+    --column-bg-color: #161C22;
+  
+}

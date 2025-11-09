@@ -17,9 +17,11 @@ interface ColumnContainerProps {
   updateTitle: (id: Id, newTitle: string) => void;
     tasks: Task[];
     addNewTask: ( columnId: Id) => void;
+    deleteTask: (id: Id) => void
+    markComplete: (id: Id) => void
 }
 
-const ColumnContainer = ({ column, deleteColumn , updateTitle  , tasks , addNewTask}: ColumnContainerProps) => {
+const ColumnContainer = ({ column, deleteColumn , updateTitle  , tasks , addNewTask , deleteTask , markComplete}: ColumnContainerProps) => {
      const [editingTitle, setEditingTitle] = useState<boolean>(false);
   const {
     attributes,
@@ -113,7 +115,7 @@ const ColumnContainer = ({ column, deleteColumn , updateTitle  , tasks , addNewT
                   {tasks && tasks.length > 0 ? (
             
           tasks.map((task) => (
-            <TaskCard key={task.id} task={task} updateTask={updateTask} />
+            <TaskCard key={task.id} task={task} updateTask={updateTask}  deleteTask={deleteTask} markComplete={markComplete}/>
             
           ))
         ) : (

@@ -128,10 +128,24 @@ const KanbanBoard = () => {
       id: Date.now(),
       columnId,
       content: `Task ${tasks.length + 1}`,
+      completed: false,
     };
     setTasks([...tasks, newTask]);
   };
-  console.log(tasks);
+ 
+  const deleteTask = (id: Id) => {
+
+    setTasks(tasks.filter((task) => task.id !== id));
+   
+
+  };
+  const markComplete = (id: Id) => {
+    setTasks((prevTasks) =>
+      prevTasks.map((task) =>
+        task.id === id ? { ...task, completed: !task.completed } : task
+      )
+    );
+  }
   return (
     <div className=" flex  min-h-screen  items-center  overflow-x-auto overflow-y-hidden  ">
       <DndContext
@@ -150,6 +164,9 @@ const KanbanBoard = () => {
                     deleteColumn={deleteColumn}
                     updateTitle={updateTitle}
                     addNewTask={addNewTask}
+                    deleteTask={deleteTask}
+                    markComplete={markComplete}
+                    
                   />
                 </div>
               ))}
@@ -175,6 +192,8 @@ const KanbanBoard = () => {
                   (task) => task.columnId === activeColumn.id
                 )}
                 addNewTask={addNewTask}
+                deleteTask={deleteTask}
+                markComplete={markComplete}
               />
             ) : null}
 
